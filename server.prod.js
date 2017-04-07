@@ -4,7 +4,7 @@ const express = require('express')
 
 const server = express()
 
-const ENV = process.env.NODE_ENV
+const ENV = process.env.NODE_ENV || 'production'
 const HOST = process.env.HOST || 'localhost'
 const PORT = process.env.PORT || 3000
 

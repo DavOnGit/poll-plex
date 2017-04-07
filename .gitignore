@@ -1,6 +1,8 @@
 node_modules/
 dist/
-config/
 playground/**/*.*
 *.log*
 npm-debug.log
+.env
+fireConf.js
+*.stackdump

@@ -1,11 +1,11 @@
 import { PropTypes, default as React } from 'react'
-import { IndexLink } from 'react-router'
+import IndexLink from 'react-router/lib/IndexLink'
 
 const Main = (props) => (
   <div>
     <h1>Hello Redux</h1>
     <div>
-      <h4>
+      <h4 className="header nav">
         <span>
           <IndexLink to="/" activeClassName="active">Home</IndexLink>
         </span>
