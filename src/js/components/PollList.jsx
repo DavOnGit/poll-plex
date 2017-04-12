@@ -1,25 +1,23 @@
-import { Component, default as React } from 'react'
+import { Component, PropTypes, default as React } from 'react'
 import { connect } from 'react-redux'
-
-import * as actions from '../actions/actions'
+import Link from 'react-router/lib/Link'
 
 class PollList extends Component {
-  // static propTypes = {}
-  _onSubmit = (e) => {
+  static propTypes = {
+    polls: PropTypes.array.isRequired,
+    loader: PropTypes.string.isRequired
+  }
+
+  _handleSubmit = (e) => {
     e.preventDefault()
     console.log(this.props)
   }
-  _fetchPolls = () => {
-    // const _actions = [
-    //   // actions.toggleLoader(),
-    //   actions.fetchPolls()
-    // ]
-    this.props.dispatch(actions.toggleLoader())
-    this.props.dispatch(actions.fetchPolls())
+
+  _handlePollClick = (e) => {
+    e.stopPropagation()
+    console.log(e.target.dataset.id)
   }
-  componentWillMount () {
-    this._fetchPolls()
-  }
+
   render () {
     const {loader, polls} = this.props
 
@@ -33,7 +31,7 @@ class PollList extends Component {
       } else if (polls && polls.length) {
         return polls.map((poll, idx) => (
           <li key={idx}>
-            <div>{poll.title}</div>
+            <Link to={`/poll/${poll.id}`}>{poll.title}</Link>
           </li>
         ))
       } else {
@@ -44,20 +42,18 @@ class PollList extends Component {
         )
       }
     }
-    // const _polls = polls.map((poll, idx) => (
-    //   <li key={idx}><div>{poll.title}</div></li>
-    // ))
+
     return (
       <div>
         <div>
-          <form onSubmit={this._onSubmit} >
+          <form onSubmit={this._handleSubmit} >
             <label>New Pool</label>
             <input type='text' placeholder='Pool Name' />
             <button>Submit</button>
           </form>
         </div>
         <div>
-          <ul>
+          <ul onClick={this._handlePollClick}>
             {_renderPolls()}
           </ul>
         </div>

@@ -6,6 +6,12 @@ import moment from 'moment'
 --> Actions
 ------------------------------------ */
 
+export const toggleLoader = () => {
+  return {
+    type: 'TOGGLE_LOADER'
+  }
+}
+
 export const setPolls = (polls) => {
   return {
     type: 'SET_POLLS',
@@ -13,14 +19,9 @@ export const setPolls = (polls) => {
   }
 }
 
-export const toggleLoader = () => {
-  return {
-    type: 'TOGGLE_LOADER'
-  }
-}
-
 export const fetchPolls = () => {
   return (dispatch, getState) => {
+    dispatch(toggleLoader())
     const pollsRef = firebaseRef.child('polls')
 
     return pollsRef.once('value').then(polls => {
@@ -32,7 +33,7 @@ export const fetchPolls = () => {
           id: key
         }
       ))
-      console.log(pollsArr)
+      console.log('pollsArr:', pollsArr)
       const _actions = [
         toggleLoader(),
         setPolls(pollsArr)
@@ -41,3 +42,7 @@ export const fetchPolls = () => {
     })
   }
 }
+
+// export const addNewPoll = () => {
+//
+// }
