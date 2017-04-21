@@ -5,10 +5,10 @@ const express = require('express')
 const server = express()
 
 const ENV = process.env.NODE_ENV || 'production'
-const HOST = process.env.HOST || 'localhost'
+// const HOST = process.env.HOST || 'localhost'
 const PORT = process.env.PORT || 3000
 
-console.log(`Server: NODE_ENV ${ENV}, HOST ${HOST}, PORT ${PORT}`)
+console.log(`Server: NODE_ENV ${ENV}, PORT ${PORT}`)
 
 server.use(express.static(path.join(__dirname, 'dist')))
 
@@ -21,5 +21,5 @@ server.listen(PORT, (err) => {
     console.log(`Server ${err}`)
     return
   };
-  console.log('Express server listening on : ' + HOST + ':' + PORT)
+  console.log('Express server listening on : ' + PORT)
 })

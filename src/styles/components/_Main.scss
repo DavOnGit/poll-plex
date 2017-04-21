@@ -1,0 +1,51 @@
+.title-bar, .top-bar, .top-bar ul {
+  background-color: $nav-bg-col;
+}
+
+.top-bar {
+  height: 45px;
+  padding: 0;
+  font-family: 'Architects Daughter', cursive;
+
+  li { font-weight: 100; }
+
+  .top-bar-left li {
+    color: #1F77B4;
+    font-size: 180%;
+    padding: 0 1rem;
+  }
+
+  .top-bar-right{
+    font-size: 120%;
+    a { color: $white }
+    li:last-child { background-color: $nav-user-bg-col }
+
+    > .menu {
+      display: flex;
+      justify-content: center;
+      > li {
+        border-left: 1px solid $nav-border-col;
+        &:hover { background-color: $nav-bg-hover-col }
+      }
+    }
+
+  }
+
+  .menu > li > a {
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: 45px;
+  }
+
+
+  .media-object {
+    margin-bottom: 0;
+    .avatar {
+      height: 30px;
+      width: 30px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 50%;
+    }
+  }
+}

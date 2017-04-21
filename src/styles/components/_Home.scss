@@ -1,0 +1,19 @@
+header {
+  padding: rem-calc(40 0);
+  .inner {
+    width: 940px;
+    margin: 0 auto;
+    h1 {
+      line-height: 1;
+      text-align: center;
+      color: $main-h1-col;
+      margin-bottom: 0;
+    }
+    h3 {
+      line-height: 1;
+      text-align: center;
+      color: $base-col;
+      &:last-child { margin-bottom: 0 }
+    }
+  }
+}

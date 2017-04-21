@@ -1,62 +1,49 @@
 import { Component, PropTypes, default as React } from 'react'
 import { connect } from 'react-redux'
 import Link from 'react-router/lib/Link'
+import Loader from 'react-loader'
+import tabletImg from '../../resources/Tablet.gif'
+import { scaleOrdinal, schemeCategory10 } from 'd3-scale'
+
+const colors = scaleOrdinal(schemeCategory10).range()
 
 class PollList extends Component {
   static propTypes = {
     polls: PropTypes.array.isRequired,
-    loader: PropTypes.string.isRequired
-  }
-
-  _handleSubmit = (e) => {
-    e.preventDefault()
-    console.log(this.props)
-  }
-
-  _handlePollClick = (e) => {
-    e.stopPropagation()
-    console.log(e.target.dataset.id)
+    isFetching: PropTypes.bool.isRequired
   }
 
   render () {
-    const {loader, polls} = this.props
-
+    const {isFetching, polls} = this.props
     const _renderPolls = () => {
-      if (loader) {
-        return (
-          <li>
-            <div>{loader}</div>
-          </li>
-        )
-      } else if (polls && polls.length) {
+      if (polls && polls.length) {
         return polls.map((poll, idx) => (
-          <li key={idx}>
-            <Link to={`/poll/${poll.id}`}>{poll.title}</Link>
+          <li key={idx} style={{backgroundColor: colors[idx % 10]}}>
+            <Link to={`/poll/${poll.id}`}><h4>{poll.title}</h4></Link>
           </li>
         ))
       } else {
-        return (
-          <li>
-            <div>No polls yet!</div>
-          </li>
-        )
+        return <li><p className='lead'>No polls yet! Be the first!</p></li>
       }
     }
 
     return (
-      <div>
-        <div>
-          <form onSubmit={this._handleSubmit} >
-            <label>New Pool</label>
-            <input type='text' placeholder='Pool Name' />
-            <button>Submit</button>
-          </form>
-        </div>
-        <div>
-          <ul onClick={this._handlePollClick}>
+      <div className='poll-list'>
+        <h3 className='text-center'>Poll List</h3>
+        <img src={tabletImg} />
+        <h4 className='subheader text-center'>
+          {isFetching ? 'Fetching polls...' : 'Have a look on users polls:'}
+        </h4>
+
+        <ul className='no-bullet'>
+          <Loader className='spinner' loaded={!isFetching} length={44} width={4}
+            radius={16} opacity={0} trail={84} color='rgb(14,101,228)'>
             {_renderPolls()}
-          </ul>
-        </div>
+          </Loader>
+        </ul>
+        <p className='text-center'>
+          <small>We're like Change.org exept we changeed nothing, yet!</small>
+        </p>
       </div>
     )
   }
@@ -65,7 +52,7 @@ class PollList extends Component {
 const mapStateToProps = (state) => {
   return {
     polls: state.polls,
-    loader: state.loader
+    isFetching: state.isFetching
   }
 }
 

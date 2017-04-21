@@ -1,0 +1,42 @@
+header.secondary .inner h1 { color: $base-col;}
+
+.new-poll {
+  width: 940px;
+  background-color: $white;
+  margin: 0 auto 1rem;
+  border-radius: 10px;
+  border: 1px solid $white;
+
+  > h3 {
+    color: $white;
+    background-color: $nav-bg-col;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-bottom: 2rem;
+  }
+
+  img {
+    display: block;
+    height: 200px;
+    margin: 0 auto 1rem;
+  }
+
+  form {
+    input { border-radius: 10px; }
+    label {
+      color: $nav-bg-col;
+      font-size: 140%;
+      line-height: 100%;
+      font-family: 'Architects Daughter', cursive;
+    }
+  }
+  button.button.expanded {
+    margin-bottom: 0;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    font-family: 'Raleway', 'Architects Daughter', cursive;
+    font-size: 180%;
+    padding: 1rem;
+    font-weight: bold;
+  }
+}

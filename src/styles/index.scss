@@ -1,25 +1,55 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:100,400);
+@import url(https://fonts.googleapis.com/css?family=Architects+Daughter);
+
+// Foundation
+@import 'base/foundation-settings';
+@import 'foundation';
+@include foundation-everything(true);   // NOTE: true option enable flexbox
+
+// Components
+@import "base/variables";
+@import "components/Main";
+@import "components/Home";
+@import "components/PollList";
+@import "components/Poll";
+@import "components/MyPolls";
+@import "components/NewPoll";
+@import "components/About";
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Architects Daughter', cursive;
+}
+p, p.help-text, input, select {
+  font-family: 'Raleway','Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+  color: $nav-bg-col;
+}
 
 body {
-  margin: 0;
-  padding: 10px;
+  //font-size: 15px;
   background-color: #ccc;
-  font-family: 'Raleway';
-  text-align: center;
-  
-  &:hover {
-    color: green;
+  background-image: url('../resources/header-bg.jpg');
+  min-width: 350px;
+}
+
+@media only screen and (max-width: 767px) {
+  header .inner, .poll-list, .poll-tab, .new-poll, .about-wrapper {
+    width: 93%;
+  }
+  header .inner h1, header .inner h2 { width: 100% }
+
+  .poll-tab {
+    form { margin-bottom: 0 }
+    .chart-wrapper { order: 1 }
   }
 }
 
-a { padding: 10px; }
+@media only screen and (max-width: 959px) and (min-width: 768px) {
+  header .inner, .poll-list, .poll-tab, .new-poll, .about-wrapper {
+    width: 740px;
+  }
+  .poll-tab {
+    form { margin-bottom: 0 }
+    .chart-wrapper { order: 1 }
+  }
 
-ul {
-  list-style:none;
-  padding: 0;
-}
-
-img {
-  // height: 200px;
-  // width: 400px;
 }

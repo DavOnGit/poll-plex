@@ -3,12 +3,24 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-var HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
+const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 // let FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
-const fireConf = require('./src/config/fireConf')
+let fireConf = null
+try {
+  fireConf = require('./src/config/fireConf')
+} catch (e) {
+  fireConf = {
+    APIKEY: process.env.APIKEY,
+    AUTHDOMAIN: process.env.AUTHDOMAIN,
+    DATABASEURL: process.env.DATABASEURL,
+    PROJECTID: process.env.PROJECTID,
+    STORAGEBUCKET: process.env.STORAGEBUCKET,
+    MESSAGINGSENDERID: process.env.MESSAGINGSENDERID
+  }
+}
 
 const NODE_ENV = process.env.NODE_ENV
 const isProd = NODE_ENV === 'production'
@@ -16,10 +28,15 @@ const isDev = NODE_ENV === 'development'
 
 console.log(`Webpack ENV: ${NODE_ENV}`)
 
-const baseEntries = ['./src/js/index.jsx']
+/* ENTRIES */
+const baseEntries = [
+  // 'script-loader!foundation-sites/dist/js/foundation.min.js',
+  './src/js/index.jsx'
+]
 const devEntries = ['webpack-hot-middleware/client', ...baseEntries]
 const prodEntries = [...baseEntries]
 
+/* PLUGINS */
 const commonsPlugins = [
   new webpack.DefinePlugin({
     'process.env': {
@@ -67,7 +84,7 @@ const config = {
   context: __dirname,
   entry: {
     application: isProd ? prodEntries : devEntries,
-    vendor: ['jquery', 'lodash', 'foundation-sites']
+    vendor: ['jquery', 'lodash', 'foundation-sites', 'react', 'react-dom', 'react-router', 'react-redux', 'redux', 'recharts', 'firebase']
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -95,15 +112,17 @@ const config = {
       },
       {
         test: /\.scss$/,
-        use: isDev ? [ 'style-loader', 'css-loader', 'sass-loader' ]
-        : extractSASS.extract({ fallback: 'style-loader', use: ['css-loader', 'sass-loader'], publicPath: '/dist/styles' })
+        use: isDev
+          ? [ 'style-loader', 'css-loader', {loader: 'sass-loader', options: {includePaths: ['node_modules/foundation-sites/scss']}} ]
+          : extractSASS.extract({ fallback: 'style-loader', use: ['css-loader', {loader: 'sass-loader', options: {includePaths: ['node_modules/foundation-sites/scss']}}], publicPath: '/dist/styles' })
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/,
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: 'images/[name].[ext]?[hash:5]'
+          name: 'images/[name].[ext]',
+          publicPath: '/'
         }
       },
       {
@@ -111,7 +130,7 @@ const config = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: 'fonts/[name].[ext]?[hash]'
+          name: 'fonts/[name].[ext]'
         }
       }
     ]

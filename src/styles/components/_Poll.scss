@@ -1,0 +1,110 @@
+header.secondary .inner h1 { color: $base-col;}
+
+.poll-tab {
+  width: 940px;
+  background-color: $white;
+  margin: 0 auto 1rem;
+  border-radius: 10px;
+  border: 1px solid $white;
+
+  > h3 {
+    color: $white;
+    background-color: $nav-bg-col;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-bottom: 0rem;
+  }
+  form {
+    margin: 3rem auto;
+
+    .input-group {
+      height: 60px;
+      width: 100%;
+      padding: 0 5px;
+      margin-bottom: 0;
+
+      .input-group-button > input { height: 100% }
+
+      .radius-left {
+        border-top-left-radius: $bor-rad;
+        border-bottom-left-radius: $bor-rad;
+      }
+      .radius-right {
+        border-top-right-radius: $bor-rad;
+        border-bottom-right-radius: $bor-rad;
+      }
+      span, .orange {
+        color: $nav-bg-col;
+        background-color: #FF7F0E;
+      }
+    }
+    .close-button { position: unset; }
+  }
+  .chart-wrapper {
+    margin: 0 auto;
+    order: 3;
+
+    h4 {
+      color: $nav-bg-col;
+      margin: 2rem 0;
+    }
+  }
+
+  h3.no-delete {
+    color: $white;
+    background-color: $nav-bg-col;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-bottom: 0rem;
+  }
+
+  svg:not(:root) { overflow: visible; }
+
+  .loader {
+    position: relative;
+    margin: 0 auto;
+    height: 200px;
+    width: 200px;
+    background-image: url('../resources/details.png');
+    background-size: contain;
+    border-radius: 50%;
+  }
+}
+
+.poll-page {
+
+  .table-wrapper {
+    order: 2;
+
+    table {
+      border-collapse: collapse;
+      margin-bottom: 0;
+    }
+    h4 {
+      color: $white;
+      background-color: $nav-bg-col;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      margin-bottom: 0;
+    }
+    tbody tr:last-child td { border-bottom: 5px solid $nav-bg-col; }
+  }
+  .delete-btn {
+    order: 5;
+
+    button {
+      margin-bottom: 0;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+  }
+}
+
+.recharts-responsive-container { height: 400px !important; }
+
+.share-social {
+  order: 4;
+
+  > .row { margin: 1.5rem 0;}
+  .SocialMediaShareButton {cursor: pointer;}
+}

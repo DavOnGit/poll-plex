@@ -4,12 +4,14 @@ import { reducer as notifReducer } from 'redux-notifications'
 
 import {
   pollsReducer,
-  loaderReducer
+  loaderReducer,
+  authReducer
 } from './reducers'
 
 const rootReducer = combineReducers({
   polls: pollsReducer,
-  loader: loaderReducer,
+  isFetching: loaderReducer,
+  auth: authReducer,
   routing: routerReducer,
   notifs: notifReducer
 })
